@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<body>
+<button onclick="withAuth()">Auth + Тест</button>
+<div id="log"></div>
+<script src="https://js.puter.com/v2/"></script>
+<script>
+async function withAuth() {
+  const log = document.getElementById('log');
+  log.innerHTML = 'Auth...';
+  try {
+    await puter.auth.signIn(); // Авторизация (email/капча, per-user лимиты)
+    const res = await puter.ai.chat('Шутка', {model: 'gemini-2.5-flash'});
+    log.innerHTML += res.message.content;
+  } catch(e) {
+    log.innerHTML += e;
+  }
+}
+</script>
+</body>
+</html>
